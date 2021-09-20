@@ -1,0 +1,76 @@
+---
+- name: create backup location
+  file:
+    path: "{{backup_location}}"
+    state: directory
+    mode: 0755
+    recurse: true
+  become: true
+  become_user: "{{deploy_user}}"
+
+- name: Check if destination exists
+  stat:
+    path: "{{deploy_location}}"
+  register: deploy_location_exists
+
+- name: Backup existing package
+  command: "mv {{deploy_location}} {{backup_location}}/"
+  become: true
+  when: deploy_location_exists.stat.exists == True
+
+- name: Create deploy path again
+  file:
+    path: "{{deploy_location}}"
+    state: directory
+    mode: 0755
+    recurse: yes
+    owner: apache
+    group: apache
+  become: true
+
+- name: Unzip the package to destination
+  unarchive:
+    src: "{{download_location}}/{{dashboard_ui_package}}"
+    dest: "{{deploy_location}}/"
+    remote_src: "yes"
+    mode: 0755
+    owner: apache
+    group: apache
+  become: true
+
+- name: Set Permissions again
+  file:
+    path: "{{deploy_location}}"
+    state: directory
+    mode: 0755
+    recurse: yes
+    owner: apache
+    group: apache
+  become: true
+
+- name: Restart httpd
+  service:
+    name: httpd
+    state: restarted
+  become: true
+
+
+# - name: Run command
+#   shell: |
+#     nohup npm run ng serve -- --environment={{deploy_env}} \
+#     1>> {{deploy_location}}/app.output.log \
+#     2>> {{deploy_location}}/app.error.log &
+#   args:
+#     executable: /bin/bash
+#     chdir: "{{deploy_location}}"
+#   environment:
+#     PATH: "{{deploy_env_path}}"
+
+#- name: "Update the config file"
+#  replace:
+#    dest: "{{env_config_path}}"
+#    regexp: '^(.*)environment=(.*)$'
+#    replace: "\1environment={{deploy_env}}"
+#    backup: yes
+#  become: true
+#  become_user: "{{deploy_user}}"

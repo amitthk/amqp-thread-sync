@@ -1,0 +1,39 @@
+<section>
+<div class="container-fluid main-content-wrapper">
+
+    <form class="form-horizontal cform-1" #loginForm="ngForm">
+        <div class="get-started-form-wrapper">
+    
+          <div class="group inner-addon left-addon">
+            <label class="label-material">username</label>            
+            <input name="username" type="text" id="username" class="form-control input-material" [(ngModel)]="login.username" #username="ngModel"
+              required/>
+            <span class="bar"></span>
+          </div>
+    
+          <div *ngIf="username.errors && (username.dirty || username.touched)">
+            <span *ngIf="username.errors.required" class="danger">Please enter username.</span>
+            <span *ngIf="username.errors.pattern" class="danger">Please enter valid username.</span>
+          </div>
+
+          <div class="group inner-addon left-addon">
+            <label class="label-material">Password</label>            
+            <input name="password" type="password" id="password" class="form-control input-material" [(ngModel)]="login.password" #password="ngModel"
+              required/>
+            <span class="bar"></span>
+          </div>
+    
+          <div *ngIf="password.errors && (password.dirty || password.touched)">
+            <span *ngIf="password.errors.required" class="danger">Please enter password.</span>
+            <span *ngIf="password.errors.pattern" class="danger">Please enter valid password.</span>
+          </div>
+
+
+          <div>
+            <button type="submit" class="btn block button-get-started" (click)="doLogin(login)"> LOGIN </button>
+            <div class="privacy-policy">By signing up you agree to our T & C and privacy policy</div>
+          </div>
+        </div>
+      </form>
+</div>
+</section>

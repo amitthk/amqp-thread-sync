@@ -1,0 +1,22 @@
+*  Spring Boot  + Angular 12 Utilities
+
+** API
+
+Run:
+#+BEGIN_SRC 
+cd api
+source ./profile_java
+mvn clean package
+mvn spring-boot:run
+#+END_SRC
+
+
+** UI
+
+Run:
+#+BEGIN_SRC 
+cd ui
+source ./profile_npm
+npm run ng serve -- --proxy-config=proxy.conf.json
+#+END_SRC
+

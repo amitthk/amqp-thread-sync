@@ -1,0 +1,8 @@
+---
+- hosts: "{{ deploy_host | default('dev') }}"
+  gather_facts: true
+  remote_user: "{{remote_user}}"
+  become: false
+  roles:
+     - { role: setup-dashboardui , become: true}
+     - { role: setup-jvcdpapi, become: true}

@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+    DocumentRoot {{ui_context_root}}
+    ServerName localhost
+
+ProxyPreserveHost On
+
+
+Alias /{{ui_app_name}}/ "{{ui_context_root}}/"
+
+<Directory {{ui_context_root}}>
+    Options FollowSymLinks
+    AllowOverride All
+    order allow,deny
+    allow from all
+</Directory>
+
+
+ProxyPass /{{api_service_name}}/ http://127.0.0.1:8081/
+ProxyPassReverse /{{api_service_name}}/ http://127.0.0.1:8081/
+
+
+</VirtualHost>

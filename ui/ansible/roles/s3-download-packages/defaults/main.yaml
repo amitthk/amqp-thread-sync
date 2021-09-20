@@ -1,0 +1,8 @@
+---
+dashboard_ui_package: "jvcdpui/releases/jvcdpui-201803041707.tar.gz"
+jvcdp_api_package: "jvcdpapi/releases/jvcdpapi-201803041724.tar.gz"
+download_location: "/tmp/packages"
+
+packages_to_download:
+  - "{{dashboard_ui_package}}"
+  - "{{jvcdp_api_package}}"

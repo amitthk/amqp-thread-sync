@@ -1,0 +1,2 @@
+export JAVA_HOME=/Users/amitthk/Apps/java/zulu8.42.0.23-ca-jdk8.0.232-macosx_x64
+export PATH=$JAVA_HOME/bin:~/Apps/hadoop/hadoop-2.7.6/bin:~/Apps/spark/spark-2.3.4-bin-hadoop2.7/bin:~/Apps/sbt/bin:~/Apps/maven/bin:$PATH

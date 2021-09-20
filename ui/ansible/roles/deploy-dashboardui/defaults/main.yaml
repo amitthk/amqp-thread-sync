@@ -1,0 +1,11 @@
+---
+base_dir: "~/app/"
+project_id: "jvcdpui"
+package_name: "jvcdp"
+deploy_context_root: "jvcdpui"
+deploy_location: "/var/www/{{project_id}}"
+backup_location: /tmp/backup/jvcdpui/{{ansible_date_time.time}}
+deploy_user: "ec2-user"
+system_environment_path: "{{lookup('env','PATH')}}"
+dashboard_ui_package: "jvcdpui/releases/jvcdpui-201803041707.tar.gz"
+download_location: "/tmp/packages"

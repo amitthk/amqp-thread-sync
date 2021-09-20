@@ -1,0 +1,18 @@
+<div class="table-responsive">
+    <table *ngIf="jsonData && jsonData.length > 0" class="table table-compact">
+        <thead>
+            <tr>
+                <th *ngFor="let item of jsonData[0] | keyvalue">
+                    {{item.key}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of jsonData">
+                <td *ngFor="let item of row | keyvalue">
+                    {{item.value}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,26 @@
+---
+- name: install boto, tar and ksh packages
+  yum: name={{ item }} state=present
+  with_items:
+      - python-boto
+      - zip
+      - unzip
+      - ksh
+      - tar
+  become: true
+
+- name: Install pip
+  easy_install:
+    name: pip
+    state: latest
+  become: true
+
+- name: Install boto3
+  pip:
+    name: boto3
+    state: present
+  become: true
+
+- include: check_and_download.yaml
+  with_items:
+    - "{{packages_to_download}}"

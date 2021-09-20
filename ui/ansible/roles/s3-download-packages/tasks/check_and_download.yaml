@@ -1,0 +1,30 @@
+- name: create directory to store the packages
+  file:
+    path: "{{download_location}}"
+    state: directory
+    owner: ec2-user
+    group: ec2-user
+    mode: 0775
+    recurse: yes
+  become: true
+
+- name: Check if this package is already downloaded
+  stat:
+    path: "{{download_location}}/{{item}}"
+  register: download_package_exists
+
+- name: "download {{ item }} from s3 repo"
+  aws_s3:
+    bucket: jvcdp-repo
+    object: "{{ item }}"
+    dest: "{{download_location}}/{{ item }}"
+    mode: get
+    aws_access_key: "{{ s3_aws_access_key_Id }}"
+    aws_secret_key: "{{ s3_secret_access_key }}"
+  when: download_package_exists.stat.exists == False
+
+- name: setting permission to packages folder
+  file:
+    path: "{{download_location}}/{{item}}"
+    mode: 0775
+  become: true
