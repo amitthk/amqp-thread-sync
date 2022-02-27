@@ -3,8 +3,8 @@ package com.boot.config;
 import javax.sql.DataSource;
 
 import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -14,7 +14,7 @@ public class PersistenceConfiguration {
 	@Bean
 	@ConfigurationProperties(prefix="spring.datasource")
 	@Primary
-	public DataSource dataSource() {
+	public DataSource getDataSource() {
 		return DataSourceBuilder.create().build();
 	}
 

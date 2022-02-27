@@ -42,7 +42,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			"/**/*.js",
 			"/v2/api-docs/**", 
 			"/swagger-resources/**",
-            "/api/auth/login"
+            "/api/auth/login",
+            "/websocket-chat/**"
     };
 
     @Autowired

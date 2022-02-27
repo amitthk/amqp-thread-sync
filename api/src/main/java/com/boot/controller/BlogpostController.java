@@ -1,5 +1,6 @@
 package com.boot.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -35,20 +36,20 @@ public class BlogpostController {
 
 	@GetMapping(value = "/{id}")
 	public Blogpost get(@PathVariable Long id) {
-		return blogpostRepository.findOne(id);
+		return blogpostRepository.getOne(id);
 	}
 
 	@PutMapping(value = "/{id}")
 	public Blogpost update(@PathVariable Long id, @RequestBody Blogpost blogpost) {
-		Blogpost existingBlogpost = blogpostRepository.findOne(id);
+		Blogpost existingBlogpost = blogpostRepository.getOne(id);
 		BeanUtils.copyProperties(blogpost, existingBlogpost);
 		return blogpostRepository.saveAndFlush(existingBlogpost);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public Blogpost delete(@PathVariable Long id) {
-		Blogpost existingBlogpost = blogpostRepository.findOne(id);
-		blogpostRepository.delete(existingBlogpost);
+		Blogpost existingBlogpost = blogpostRepository.getOne(id);
+		blogpostRepository.deleteInBatch(Collections.singleton(existingBlogpost));
 		return existingBlogpost;
 	}
 	

@@ -12,7 +12,7 @@ public class TasksBySchedule {
     @Autowired
     RabbitMQService rabbitMQService;
 
-    @Scheduled(fixedDelay = 1000, initialDelay = 1000)
+    //@Scheduled(fixedDelay = 1000, initialDelay = 1000)
     public void scheduleFixedRateWithInitialDelayTask() {
 
         long now = System.currentTimeMillis() / 1000;
